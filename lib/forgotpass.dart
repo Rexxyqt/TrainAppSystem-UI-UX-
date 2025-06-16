@@ -121,7 +121,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ],
                 ),
               ),
-              // Notification Banner
+              
               if (_showMessage)
                 Positioned(
                   top: 0,
