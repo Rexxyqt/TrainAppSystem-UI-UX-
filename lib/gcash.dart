@@ -11,7 +11,7 @@ class _GCashPageState extends State<GCashPage> {
   final TextEditingController amountController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController gcashPinController =
-      TextEditingController(); // <-- new PIN controller
+      TextEditingController(); 
   double lrtBalance = 0.0;
 
   @override
@@ -35,14 +35,14 @@ class _GCashPageState extends State<GCashPage> {
       await prefs.setDouble('lrt_balance', lrtBalance);
       await prefs.setString('phone', phoneController.text);
       await prefs.setString(
-          'gcash_pin', gcashPinController.text); // <-- save pin
+          'gcash_pin', gcashPinController.text); 
       amountController.clear();
       phoneController.clear();
       gcashPinController.clear();
 
-      setState(() {}); // Update UI
+      setState(() {}); 
 
-      // Log the top-up in the transaction history
+      
       _logTopUpTransaction(amount);
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -64,18 +64,18 @@ class _GCashPageState extends State<GCashPage> {
   Future<void> _logTopUpTransaction(double amount) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    // Get current date and format it
+    
     final now = DateTime.now();
     final formattedDate = "${_monthString(now.month)} ${now.day}, ${now.year}";
 
-    // Load existing transactions
+   
     String? savedData = prefs.getString('lrt_transactions');
     List<Map<String, dynamic>> transactions = [];
     if (savedData != null) {
       transactions = List<Map<String, dynamic>>.from(json.decode(savedData));
     }
 
-    // Add new top-up entry
+    
     Map<String, dynamic> newTransaction = {
       'date': formattedDate,
       'entries': [
@@ -87,8 +87,8 @@ class _GCashPageState extends State<GCashPage> {
       ],
     };
 
-    // Add to the transaction list and save it
-    transactions.insert(0, newTransaction); // Add to the top of the list
+    
+    transactions.insert(0, newTransaction);
     await prefs.setString('lrt_transactions', json.encode(transactions));
   }
 
@@ -127,8 +127,8 @@ class _GCashPageState extends State<GCashPage> {
             Center(
               child: Image.asset(
                 'assets/images/gcashlogo.png',
-                width: 220, // Increased size here
-                height: 220, // Increased size here
+                width: 220, 
+                height: 220, 
               ),
             ),
             SizedBox(height: 30),
