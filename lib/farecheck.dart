@@ -53,7 +53,7 @@ class _FareCheckPageState extends State<FareCheckPage> {
       int end = stations.indexOf(selectedTo!);
       int numStations = (end - start).abs();
 
-      // Official LRT-1 fare matrix for Single Journey Ticket
+      
       Map<int, double> fareMatrixSingleJourney = {
         1: 15.00, // 1-2 stations
         2: 15.00, // 1-2 stations
@@ -68,7 +68,7 @@ class _FareCheckPageState extends State<FareCheckPage> {
         11: 40.00, // 11+ stations
       };
 
-      // Official LRT-1 fare matrix for Beep Card (discounted)
+      
       Map<int, double> fareMatrixBeepCard = {
         1: 14.00, // 1-2 stations
         2: 14.00, // 1-2 stations
@@ -83,20 +83,19 @@ class _FareCheckPageState extends State<FareCheckPage> {
         11: 36.00, // 11+ stations
       };
 
-      // Get the correct fare matrix based on ticket type
       Map<int, double> fareMatrix =
           selectedTicketType == 'Single Journey Ticket'
               ? fareMatrixSingleJourney
               : fareMatrixBeepCard;
 
-      // Get the fare for the selected number of stations
+      
       double baseFare = fareMatrix[numStations] ??
-          40.00; // Default max fare if number of stations is too high
+          40.00; 
 
-      // Apply discounts for Seniors and PWD
+      
       if (selectedPassengerType == 'Senior Citizen' ||
           selectedPassengerType == 'PWD') {
-        baseFare *= 0.8; // 20% discount
+        baseFare *= 0.8; 
       }
 
       setState(() {
